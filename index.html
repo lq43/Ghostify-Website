@@ -1,1 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ghostify — Futuristic Android Location QA Tool</title>
+  <meta name="description" content="Ghostify is an open-source Android location simulation and developer QA utility for testing location-aware applications.">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ghostify — Futuristic Android Location QA Tool">
+  <meta property="og:description" content="Simulate and test mock locations for your Android apps with precision, control, and zero real-world hassle.">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- Favicon & Styles -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Production Script -->
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- Background Animated Cyber Grid & Canvas -->
+  <canvas id="cyber-canvas"></canvas>
+  <div class="ambient-grid"></div>
+  <div class="ambient-glow-top"></div>
+
+  <!-- Header / Navigation Bar -->
+  <header id="navbar" class="navbar">
+    <div class="container nav-container">
+      
+      <!-- Brand Logo -->
+      <a href="#home" class="brand-link" aria-label="Ghostify Home">
+        <div class="brand-icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00FF66" stroke-width="2" stroke-linejoin="round">
+            <path d="M12 2C7.58 2 4 5.58 4 10C4 13.5 6 16.5 8 18.5V21L10 20L12 21L14 20L16 21V18.5C18 16.5 20 13.5 20 10C20 5.58 16.42 2 12 2Z" fill="#06120a"/>
+            <circle cx="9" cy="9.5" r="1.5" fill="#00FF66"/>
+            <circle cx="15" cy="9.5" r="1.5" fill="#00FF66"/>
+            <circle cx="12" cy="14" r="1.5" fill="#00FF66"/>
+          </svg>
+        </div>
+        <div class="brand-text-col">
+          <div class="brand-title">GHOST<span>IFY</span></div>
+          <div class="brand-badge">v1.4 DEV TOOL</div>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-links" aria-label="Main Navigation">
+        <a href="#home" class="nav-link active" data-target="home">Home</a>
+        <a href="#about" class="nav-link" data-target="about">About</a>
+        <a href="#features" class="nav-link" data-target="features">Features</a>
+        <a href="#download" class="nav-link" data-target="download">Download</a>
+        <a href="#contact" class="nav-link" data-target="contact">Contact</a>
+      </nav>
+
+      <!-- Desktop Action Buttons -->
+      <div class="nav-actions">
+        <a href="https://github.com/lq43/Ghostify" 
+           target="_blank" 
+           rel="noreferrer" 
+           class="btn-icon" 
+           title="View on GitHub" 
+           aria-label="View Ghostify on GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+            <path d="M9 18c-4.51 2-5-2-7-2"></path>
+          </svg>
+        </a>
+
+        <a href="#download" class="btn-primary btn-sm">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Download App</span>
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-toggle" class="mobile-toggle" aria-label="Toggle navigation menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div class="container">
+      <div id="mobile-dropdown" class="mobile-dropdown">
+        <a href="#home" class="mobile-nav-link">Home</a>
+        <a href="#about" class="mobile-nav-link">About</a>
+        <a href="#features" class="mobile-nav-link">Features</a>
+        <a href="#download" class="mobile-nav-link">Download</a>
+        <a href="#contact" class="mobile-nav-link">Contact</a>
+        <div style="border-top: 1px solid rgba(255,255,255,0.08); margin-top: 6px; padding-top: 10px; display: flex; flex-direction: column; gap: 8px;">
+          <a href="#download" class="btn-primary" style="justify-content: center;">
+            Download Ghostify APK
+          </a>
+          <a href="https://github.com/lq43/Ghostify" target="_blank" rel="noreferrer" class="btn-secondary" style="justify-content: center;">
+            View on GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <!-- Left: Hero Copy -->
+          <div class="hero-content">
+            <div class="cyber-badge">
+              <span class="pulse-dot"></span>
+              <span>ANDROID LOCATION QA TOOL</span>
+            </div>
+
+            <h1 class="hero-title">
+              SPOOF THE MATRIX.<br>
+              <span class="text-accent text-glow">TEST REALITY.</span>
+            </h1>
+
+            <p class="hero-description">
+              Simulate and test mock locations for your Android apps with precision, control, and zero real-world hassle. Built for mobile engineers, QA testers, and developers.
+            </p>
+
+            <div class="hero-cta-group">
+              <a href="#download" class="btn-primary" id="hero-download-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <span>Download Ghostify</span>
+              </a>
+
+              <a href="#contact" class="btn-secondary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span>Contact</span>
+              </a>
+            </div>
+
+            <!-- Highlights Bar -->
+            <div class="highlights-bar">
+              <div class="highlight-item">
+                <span>MOCK PROVIDER</span>
+                <strong>Android Native</strong>
+              </div>
+              <div class="highlight-item">
+                <span>PRIVACY</span>
+                <strong>100% Offline</strong>
+              </div>
+              <div class="highlight-item">
+                <span>LICENSE</span>
+                <strong class="accent">Open Source</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Interactive Android Phone Mockup -->
+          <div class="phone-mockup-wrapper">
+            <div class="phone-mockup-glow"></div>
+            
+            <div class="phone-frame">
+              <!-- Android Status Bar -->
+              <div class="phone-status-bar">
+                <span>12:42</span>
+                <div style="display: flex; gap: 6px; align-items: center;">
+                  <span>5G</span>
+                  <span>98%</span>
+                </div>
+              </div>
+
+              <!-- Phone App Header -->
+              <div class="phone-app-header">
+                <span class="app-id">GHOSTIFY_HUD // v1.4</span>
+                <span id="mock-status-badge" style="font-family: var(--font-mono); font-size: 0.65rem; color: #00FF66; font-weight: 700;">
+                  SIMULATING
+                </span>
+              </div>
+
+              <!-- Interactive Tabs -->
+              <div class="phone-tabs">
+                <button class="phone-tab-btn active" data-tab="map">Map Preview</button>
+                <button class="phone-tab-btn" data-tab="route">Route Simulator</button>
+                <button class="phone-tab-btn" data-tab="terminal">Dev Logs</button>
+              </div>
+
+              <!-- Phone Screen Content -->
+              <div class="phone-screen-content">
+                
+                <!-- View 1: Map Screen -->
+                <div id="view-map" class="tab-view active">
+                  <div class="phone-map-container">
+                    <div class="phone-map-grid"></div>
+                    <div class="radar-sweep"></div>
+                    
+                    <div class="target-pin">
+                      <div class="pin-pulse"></div>
+                      <div class="pin-circle">
+                        <div class="pin-circle-inner"></div>
+                      </div>
+                    </div>
+
+                    <div style="position: absolute; bottom: 8px; left: 8px; font-family: var(--font-mono); font-size: 0.6rem; color: #00FF66; background: rgba(5,13,8,0.85); padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(0,255,102,0.2);">
+                      TARGET: BERLIN_HQ
+                    </div>
+                  </div>
+
+                  <!-- Mockup Controls -->
+                  <div class="mockup-controls">
+                    <div class="mockup-coord-bar">
+                      <span id="live-lat" style="color: #fff;">52.520008° N</span>
+                      <span id="live-lng" style="color: #fff;">13.404954° E</span>
+                    </div>
+
+                    <div class="mockup-action-row">
+                      <button id="mock-toggle-btn" class="btn-mock-toggle">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                          <rect x="6" y="4" width="4" height="16"/>
+                          <rect x="14" y="4" width="4" height="16"/>
+                        </svg>
+                        <span>Pause Mock</span>
+                      </button>
+
+                      <div style="font-family: var(--font-mono); font-size: 0.68rem; color: #7A9587; padding: 4px 8px; background: #040906; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+                        SPEED: <span id="live-speed" style="color: #00FF66; font-weight: bold;">24 km/h</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- View 2: Route Simulator -->
+                <div id="view-route" class="tab-view">
+                  <div style="font-family: var(--font-mono); font-size: 0.7rem; color: #B1C8BB; margin-bottom: 8px;">
+                    ACTIVE WAYPOINT ROUTE
+                  </div>
+                  <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px;">
+                    <div style="padding: 8px; border-radius: 6px; background: #08160e; border: 1px solid var(--border-green); font-family: var(--font-mono); font-size: 0.65rem;">
+                      <span style="color: #00FF66;">[A]</span> Alexanderplatz (Start)
+                    </div>
+                    <div style="padding: 8px; border-radius: 6px; background: #08160e; border: 1px solid var(--border-green); font-family: var(--font-mono); font-size: 0.65rem;">
+                      <span style="color: #00FF66;">[B]</span> Brandenburger Tor (Waypoint)
+                    </div>
+                    <div style="padding: 8px; border-radius: 6px; background: #08160e; border: 1px solid var(--border-green); font-family: var(--font-mono); font-size: 0.65rem;">
+                      <span style="color: #00FF66;">[C]</span> Tiergarten (Finish)
+                    </div>
+                  </div>
+                  <div style="padding: 8px; border-radius: 6px; background: #020603; border: 1px solid rgba(0,255,102,0.2); font-family: var(--font-mono); font-size: 0.65rem; color: #7A9587;">
+                    Profile: Walking QA / Jitter: &plusmn;1.4m
+                  </div>
+                </div>
+
+                <!-- View 3: Dev Logs -->
+                <div id="view-terminal" class="tab-view">
+                  <div class="phone-terminal">
+                    <div class="terminal-line"><span style="color: #00FF66;">&gt;</span> System.init(GhostifyCore)</div>
+                    <div class="terminal-line"><span style="color: #00FF66;">&gt;</span> MockLocationProvider.READY</div>
+                    <div class="terminal-line dim">&gt; Provider: "gps" hooked via Android API</div>
+                    <div class="terminal-line"><span style="color: #00FF66;">&gt;</span> Satellites locked: 18 / SNR: 44dB</div>
+                    <div class="terminal-line">&gt; Inject: Lat=52.520008, Lng=13.404954</div>
+                    <div class="terminal-line dim">&gt; Bearing: 142.4&deg;, Alt: 34.2m</div>
+                    <div class="terminal-line"><span style="color: #00FF66;">&gt;</span> Telemetry: 100% device-local</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <div class="container">
+        
+        <div style="max-width: 720px;">
+          <div class="cyber-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+            <span>Developer Overview</span>
+          </div>
+
+          <h2 style="font-family: var(--font-mono); font-size: 2.2rem; font-weight: 800; color: #fff;">
+            What is <span class="text-accent text-glow">Ghostify</span>?
+          </h2>
+
+          <p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 16px; line-height: 1.7;">
+            Ghostify is an Android location simulation and developer QA utility designed exclusively for testing and debugging location-aware mobile applications.
+          </p>
+        </div>
+
+        <!-- Essential Informational Disclaimer Banner -->
+        <div class="disclaimer-card">
+          <div class="disclaimer-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+          </div>
+          <div class="disclaimer-content">
+            <h4>Official Informational & Presentation Website</h4>
+            <p>
+              This website serves strictly as the official presentation, documentation, and contact portal for the Ghostify project. This website does not implement GPS spoofing, fake GPS, location simulation, mock locations, or any functionality that changes a device's location. Ghostify is intended exclusively for software developers and QA engineers testing their own location-aware Android applications in controlled environments.
+            </p>
+          </div>
+        </div>
+
+        <!-- 3 Pillars Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 36px;">
+          
+          <div class="cyber-card">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+            </div>
+            <h3 class="card-title">Built for QA & Engineers</h3>
+            <p class="card-text">
+              Accelerate QA workflows for navigation apps, delivery tracking, and geofencing without having to travel physically.
+            </p>
+          </div>
+
+          <div class="cyber-card">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <h3 class="card-title">100% Local & Offline</h3>
+            <p class="card-text">
+              No cloud accounts, telemetry trackers, or external servers. All coordinates run strictly on the test device via Android APIs.
+            </p>
+          </div>
+
+          <div class="cyber-card">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+            <h3 class="card-title">Transparent Open Source</h3>
+            <p class="card-text">
+              Completely open source codebase on GitHub. Inspect the Kotlin logic, submit PRs, and audit the code anytime.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+      <div class="container">
+        
+        <div class="text-center" style="max-width: 680px; margin: 0 auto;">
+          <div class="cyber-badge" style="margin-left: auto; margin-right: auto;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+            <span>Core Capabilities</span>
+          </div>
+
+          <h2 style="font-family: var(--font-mono); font-size: 2.2rem; font-weight: 800; color: #fff;">
+            Engineering <span class="text-accent text-glow">Features</span>
+          </h2>
+
+          <p style="font-size: 1rem; color: var(--text-secondary); margin-top: 12px;">
+            Purpose-built tools for testing edge cases, boundary transitions, and location accuracy.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          
+          <div class="cyber-card">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="22" y1="12" x2="18" y2="12"></line>
+                <line x1="6" y1="12" x2="2" y2="12"></line>
+                <line x1="12" y1="6" x2="12" y2="2"></line>
+                <line x1="12" y1="22" x2="12" y2="18"></line>
+              </svg>
+            </div>
+            <h3 class="card-title">Android Mock Provider</h3>
+            <p class="card-text">
+              Direct integration with native Android <code style="color: #00FF66; font-size: 0.8rem;">LocationManager.setTestProviderLocation</code> for high fidelity simulation.
+            </p>
+          </div>
+
+          <div class="cyber-card">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                <polyline points="17 6 23 6 23 12"></polyline>
+              </svg>
+            </div>
+            <h3 class="card-title">Virtual Joystick & Routes</h3>
+            <p class="card-text">
+              Navigate test coordinates smoothly in real time with variable speed, waypoint paths, and realistic bearing angles.
+            </p>
+          </div>
+
+          <div class="cyber-card">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path>
+                <circle cx="12" cy="9" r="2.5"></circle>
+              </svg>
+            </div>
+            <h3 class="card-title">Geofence Boundary Testing</h3>
+            <p class="card-text">
+              Test entry, exit, and dwell triggers around virtual perimeters to verify background alert handlers and geocaching logic.
+            </p>
+          </div>
+
+          <div class="cyber-card">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 20V10"></path>
+                <path d="M12 20V4"></path>
+                <path d="M6 20v-6"></path>
+              </svg>
+            </div>
+            <h3 class="card-title">Elevation & Sensor Jitter</h3>
+            <p class="card-text">
+              Simulate realistic altitude changes and subtle natural GPS coordinate noise to challenge app smoothing algorithms.
+            </p>
+          </div>
+
+          <div class="cyber-card">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                <rect x="9" y="9" width="6" height="6"></rect>
+              </svg>
+            </div>
+            <h3 class="card-title">QA Velocity Presets</h3>
+            <p class="card-text">
+              Quickly switch simulation velocities between Walking (5 km/h), Cycling (20 km/h), Driving (65 km/h), and High-Speed Train.
+            </p>
+          </div>
+
+          <div class="cyber-card">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+              </svg>
+            </div>
+            <h3 class="card-title">Floating HUD Overlay</h3>
+            <p class="card-text">
+              Adjust coordinates while actively interacting with the target application without needing to switch back and forth.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download">
+      <div class="container">
+        
+        <div class="download-box">
+          
+          <div class="cyber-badge">
+            <span class="pulse-dot"></span>
+            <span>CURRENT RELEASE</span>
+          </div>
+
+          <h2 style="font-family: var(--font-mono); font-size: 2.2rem; font-weight: 800; color: #fff;">
+            Download <span class="text-accent text-glow">Ghostify APK</span>
+          </h2>
+
+          <p style="font-size: 1rem; color: var(--text-secondary); margin-top: 10px; max-width: 620px;">
+            Get the latest compiled standalone APK for testing on physical Android hardware or Android Studio emulators.
+          </p>
+
+          <!-- Specs Grid -->
+          <div class="specs-grid">
+            <div class="spec-item">
+              <span>VERSION</span>
+              <strong>v1.4.2-stable</strong>
+            </div>
+            <div class="spec-item">
+              <span>FILE SIZE</span>
+              <strong>8.4 MB</strong>
+            </div>
+            <div class="spec-item">
+              <span>REQUIREMENT</span>
+              <strong>Android 10+ (API 29)</strong>
+            </div>
+            <div class="spec-item">
+              <span>RELEASE DATE</span>
+              <strong>September 2026</strong>
+            </div>
+          </div>
+
+          <!-- SHA256 Checksum -->
+          <div class="checksum-box">
+            <div style="display: flex; align-items: center; gap: 8px; overflow: hidden;">
+              <span style="color: var(--accent-green); font-weight: 700;">SHA256:</span>
+              <span class="checksum-text">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</span>
+            </div>
+            <button id="copy-sha-btn" class="btn-copy">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>Copy</span>
+            </button>
+          </div>
+
+          <!-- Action Buttons -->
+          <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+            <a href="#download" id="download-apk-btn" class="btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Download APK</span>
+            </a>
+
+            <a href="https://github.com/lq43/Ghostify" 
+               target="_blank" 
+               rel="noreferrer" 
+               class="btn-secondary"
+               id="download-github-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+                <path d="M9 18c-4.51 2-5-2-7-2"></path>
+              </svg>
+              <span>View on GitHub</span>
+            </a>
+          </div>
+
+          <!-- Dynamic APK download feedback container -->
+          <div id="apk-notice" class="hidden" style="margin-top: 24px; padding: 16px; border-radius: var(--radius-md); background: #06140b; border: 1px solid var(--accent-green); font-family: var(--font-mono); font-size: 0.8rem; color: #00FF66;">
+            &check; Download release package verified. Ensure "Allow installation of apps from unknown sources" is enabled in Android settings for developer testing.
+          </div>
+
+          <!-- 3-Step Setup Instructions -->
+          <div class="steps-grid">
+            <div class="step-card">
+              <div class="step-num">STEP 01</div>
+              <div class="step-title">Enable Developer Options</div>
+              <div class="step-desc">Go to Settings &gt; About Phone and tap "Build number" 7 times.</div>
+            </div>
+            <div class="step-card">
+              <div class="step-num">STEP 02</div>
+              <div class="step-title">Select Mock Location App</div>
+              <div class="step-desc">Open Developer Options &gt; "Select mock location app" and choose Ghostify.</div>
+            </div>
+            <div class="step-card">
+              <div class="step-num">STEP 03</div>
+              <div class="step-title">Launch Simulation</div>
+              <div class="step-desc">Open Ghostify, drop a target pin or load a route, and begin testing.</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- GitHub Open Source Section -->
+    <section id="github-section">
+      <div class="container">
+        
+        <div class="github-banner">
+          <div class="github-grid">
+            
+            <div>
+              <div class="cyber-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+                  <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                </svg>
+                <span>Public Repository</span>
+              </div>
+
+              <h2 style="font-family: var(--font-mono); font-size: 2.4rem; font-weight: 800; color: #fff;">
+                Open <span class="text-accent text-glow">Source</span>
+              </h2>
+
+              <p style="font-size: 1.05rem; color: var(--text-secondary); margin-top: 14px; line-height: 1.7; max-width: 520px;">
+                Ghostify is an open-source project. Explore the source code, report issues, suggest improvements and contribute.
+              </p>
+
+              <div style="margin-top: 28px;">
+                <a href="https://github.com/lq43/Ghostify" 
+                   target="_blank" 
+                   rel="noreferrer" 
+                   class="btn-primary"
+                   id="github-main-cta">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+                    <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                  </svg>
+                  <span>View Ghostify on GitHub</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- 4 Mini Feature Quadrants -->
+            <div class="mini-cards-grid">
+              <div class="mini-card">
+                <div class="mini-card-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="m4.93 4.93 4.24 4.24"></path>
+                    <path d="m14.83 9.17 4.24-4.24"></path>
+                    <path d="m14.83 14.83 4.24 4.24"></path>
+                    <path d="m9.17 14.83-4.24 4.24"></path>
+                  </svg>
+                </div>
+                <h5>Issue Tracker</h5>
+                <p>Submit bug tickets, device compatibility reports, and feature requests.</p>
+              </div>
+
+              <div class="mini-card">
+                <div class="mini-card-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="18" cy="18" r="3"></circle>
+                    <circle cx="6" cy="6" r="3"></circle>
+                    <path d="M13 6h3a2 2 0 0 1 2 2v7"></path>
+                    <line x1="6" y1="9" x2="6" y2="21"></line>
+                  </svg>
+                </div>
+                <h5>Pull Requests</h5>
+                <p>Contributions to the Kotlin codebase and automated test suites are welcomed.</p>
+              </div>
+
+              <div class="mini-card">
+                <div class="mini-card-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                  </svg>
+                </div>
+                <h5>Developer Docs</h5>
+                <p>Guides on mock location architecture, Android permissions, and ADB scripting.</p>
+              </div>
+
+              <div class="mini-card">
+                <div class="mini-card-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  </svg>
+                </div>
+                <h5>Open License</h5>
+                <p>Free and transparent software created for developers and testing enthusiasts.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="container">
+        
+        <div class="text-center" style="max-width: 680px; margin: 0 auto;">
+          <div class="cyber-badge" style="margin-left: auto; margin-right: auto;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+            <span>Developer Support & Inquiries</span>
+          </div>
+
+          <h2 style="font-family: var(--font-mono); font-size: 2.2rem; font-weight: 800; color: #fff;">
+            Contact <span class="text-accent text-glow">Ghostify</span>
+          </h2>
+
+          <p style="font-size: 1rem; color: var(--text-secondary); margin-top: 10px;">
+            Have a question, found a bug, or want to get in touch?
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          
+          <!-- Left: Direct Info Cards -->
+          <div class="contact-cards-col">
+            
+            <!-- Email Card -->
+            <div class="contact-info-card">
+              <div class="contact-card-header">
+                <div class="card-icon" style="margin-bottom: 0;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                  </svg>
+                </div>
+                <span class="cyber-badge" style="margin-bottom: 0; font-size: 0.65rem;">EMAIL</span>
+              </div>
+              <h4 style="font-family: var(--font-mono); font-size: 1rem; color: #fff; margin-bottom: 6px;">Direct Developer Mail</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px;">
+                Reach out directly for general inquiries, feedback, or collaborations.
+              </p>
+              <div style="background: #040905; border: 1px solid rgba(255,255,255,0.06); padding: 10px 14px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: space-between;">
+                <a href="mailto:ghostifysupport@gmail.com" style="color: #fff; text-decoration: none; font-family: var(--font-mono); font-size: 0.8rem; transition: color 0.2s;" onmouseover="this.style.color='#00FF66'" onmouseout="this.style.color='#fff'">
+                  ghostifysupport@gmail.com
+                </a>
+                <button class="btn-copy copy-email-trigger" title="Copy email address">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  <span>Copy</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- GitHub Repository Card -->
+            <div class="contact-info-card">
+              <div class="contact-card-header">
+                <div class="card-icon" style="margin-bottom: 0;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+                    <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                  </svg>
+                </div>
+                <span class="cyber-badge" style="margin-bottom: 0; font-size: 0.65rem;">GITHUB</span>
+              </div>
+              <h4 style="font-family: var(--font-mono); font-size: 1rem; color: #fff; margin-bottom: 6px;">Source Repository</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px;">
+                Browse the project codebase, stars, discussions, and release archives.
+              </p>
+              <a href="https://github.com/lq43/Ghostify" 
+                 target="_blank" 
+                 rel="noreferrer" 
+                 style="display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-green); text-decoration: none;">
+                <span>Visit GitHub Repository</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+            </div>
+
+            <!-- Bug Report Card -->
+            <div class="contact-info-card">
+              <div class="contact-card-header">
+                <div class="card-icon" style="margin-bottom: 0;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect width="8" height="14" x="8" y="6" rx="4"></rect>
+                    <path d="m19 7-3 2"></path>
+                    <path d="m5 7 3 2"></path>
+                    <path d="m19 19-3-2"></path>
+                    <path d="m5 19 3-2"></path>
+                    <path d="M20 13h-4"></path>
+                    <path d="M4 13h4"></path>
+                    <path d="m10 4 1 2"></path>
+                    <path d="m14 4-1 2"></path>
+                  </svg>
+                </div>
+                <span class="cyber-badge" style="margin-bottom: 0; font-size: 0.65rem;">BUG REPORT</span>
+              </div>
+              <h4 style="font-family: var(--font-mono); font-size: 1rem; color: #fff; margin-bottom: 6px;">Encountered an Issue?</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px;">
+                Help improve device compatibility and report unexpected behavior.
+              </p>
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <button id="prefill-bug-btn" class="btn-copy">
+                  <span>Prefill Bug Form</span>
+                </button>
+                <a href="https://github.com/lq43/Ghostify/issues" 
+                   target="_blank" 
+                   rel="noreferrer" 
+                   style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); text-decoration: none;">
+                  GitHub Issues &rarr;
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right: Interactive Contact Form -->
+          <div class="contact-form-box">
+            
+            <form id="contact-form">
+              <div class="form-group">
+                <label for="contact-name" class="form-label">YOUR NAME</label>
+                <input type="text" id="contact-name" class="form-input" placeholder="e.g. Alex Rivera" required>
+                <div id="err-name" class="form-error">Please provide your name (min 2 chars).</div>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-email" class="form-label">YOUR EMAIL</label>
+                <input type="email" id="contact-email" class="form-input" placeholder="alex@company.example" required>
+                <div id="err-email" class="form-error">Please provide a valid email format.</div>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-subject" class="form-label">SUBJECT</label>
+                <input type="text" id="contact-subject" class="form-input" placeholder="Feature Request / Question / Device Bug" required>
+                <div id="err-subject" class="form-error">Please provide a subject line.</div>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-message" class="form-label">MESSAGE</label>
+                <textarea id="contact-message" class="form-textarea" placeholder="Describe your inquiry, test environment, or device details..." required></textarea>
+                <div id="err-message" class="form-error">Message must be at least 10 characters.</div>
+              </div>
+
+              <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+                <span>Send Message</span>
+              </button>
+            </form>
+
+            <!-- Success Card -->
+            <div id="form-success-card" class="form-success-card">
+              <div class="success-icon-box">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </div>
+              <h3 style="font-family: var(--font-mono); font-size: 1.2rem; color: #fff; margin-bottom: 8px;">
+                Dispatch Successful
+              </h3>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); max-width: 380px; margin-bottom: 16px;">
+                Your message has been processed. A confirmation has been routed to the developer inbox.
+              </p>
+              <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-green); background: #040905; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border-green); margin-bottom: 24px;">
+                TICKET ID: <span id="ticket-id-display">GF-883A9F</span>
+              </div>
+              <button id="reset-form-btn" class="btn-secondary btn-sm">
+                Send Another Message
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      
+      <div class="footer-top">
+        
+        <div>
+          <a href="#home" class="brand-link" style="margin-bottom: 12px;">
+            <div class="brand-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00FF66" stroke-width="2" stroke-linejoin="round">
+                <path d="M12 2C7.58 2 4 5.58 4 10C4 13.5 6 16.5 8 18.5V21L10 20L12 21L14 20L16 21V18.5C18 16.5 20 13.5 20 10C20 5.58 16.42 2 12 2Z" fill="#06120a"/>
+                <circle cx="9" cy="9.5" r="1.5" fill="#00FF66"/>
+                <circle cx="15" cy="9.5" r="1.5" fill="#00FF66"/>
+                <circle cx="12" cy="14" r="1.5" fill="#00FF66"/>
+              </svg>
+            </div>
+            <div class="brand-text-col">
+              <div class="brand-title">GHOST<span>IFY</span></div>
+              <div class="brand-badge">DEVELOPER QA SUITE</div>
+            </div>
+          </a>
+          <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-green); margin-bottom: 6px;">
+            Built for developers. Designed for the future.
+          </p>
+          <p style="font-size: 0.75rem; color: var(--text-muted); max-width: 380px;">
+            Android location simulation and QA tool for testing location-aware services and geofenced applications.
+          </p>
+        </div>
+
+        <!-- Footer Links -->
+        <div class="footer-links">
+          <a href="https://github.com/lq43/Ghostify" 
+             target="_blank" 
+             rel="noreferrer" 
+             class="footer-link" 
+             id="footer-github-link">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+              <path d="M9 18c-4.51 2-5-2-7-2"></path>
+            </svg>
+            <span>GitHub</span>
+          </a>
+
+          <a href="mailto:ghostifysupport@gmail.com" class="footer-link" id="footer-email-link">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+            <span>ghostifysupport@gmail.com</span>
+          </a>
+
+          <button class="footer-link open-privacy-trigger">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <span>Privacy</span>
+          </button>
+
+          <button class="footer-link open-imprint-trigger">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            <span>Imprint</span>
+          </button>
+
+          <button id="scroll-top-btn" class="btn-icon" aria-label="Scroll back to top of page">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Bottom Attribution -->
+      <div class="footer-bottom">
+        <div>&copy; 2026 Ghostify. Open Source Developer QA Project.</div>
+        <div>Android is a trademark of Google LLC. Ghostify is an independent testing utility.</div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Privacy Modal -->
+  <div id="modal-privacy" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00FF66" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <span>Privacy Policy</span>
+        </div>
+        <button class="modal-close-btn modal-close-trigger" aria-label="Close modal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p><strong>1. Informational Portal:</strong> This website is an informational presentation and contact page for the Ghostify project. No personal telemetry or location coordinates are collected by this website.</p>
+        <p><strong>2. Android Application Privacy:</strong> Ghostify on Android operates 100% locally on the device via the native Android Mock Location API. It does not send coordinate logs, search queries, or movement data to any remote server.</p>
+        <p><strong>3. Contact Inquiries:</strong> Any messages sent via the contact form on this site are processed purely to respond to developer and user inquiries and are never sold or shared.</p>
+        <p><strong>4. Cookies & Trackers:</strong> This website does not utilize invasive advertising trackers, cross-site profiling cookies, or third-party behavioral analytics.</p>
+      </div>
+
+      <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
+        <button class="btn-primary btn-sm modal-close-trigger">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Imprint Modal -->
+  <div id="modal-imprint" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00FF66" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+          <span>Imprint & Legal Notice</span>
+        </div>
+        <button class="modal-close-btn modal-close-trigger" aria-label="Close modal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p><strong>Project:</strong> Ghostify (Open Source Android QA Utility)</p>
+        <p><strong>Purpose:</strong> Software testing and quality assurance tool for Android location-based applications.</p>
+        <p><strong>Website Nature:</strong> This website is an informational presentation only. It does not provide GPS spoofing, mock locations, or device location modification capabilities.</p>
+        <p><strong>Open Source License:</strong> Available under open source terms for developer research, application debugging, and QA verification.</p>
+        <p><strong>Repository:</strong> https://github.com/lq43/Ghostify</p>
+        <p><strong>Support Email:</strong> ghostifysupport@gmail.com</p>
+        <p><strong>Notice of Intended Use:</strong> Users are responsible for complying with all applicable application terms of service, testing protocols, and local regulations when testing apps on physical devices or emulators.</p>
+      </div>
+
+      <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
+        <button class="btn-primary btn-sm modal-close-trigger">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast-notice" class="toast-notice">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span id="toast-message">Notification</span>
+  </div>
+
+</body>
+</html>
 
